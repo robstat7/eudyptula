@@ -1,0 +1,30 @@
+$ ls -l /boot | grep 6.8.0-rc3-00136-g1f719a2f3fa6
+-rw-r--r--  1 root root   219633 Feb  9 12:41 config-6.8.0-rc3-00136-g1f719a2f3fa6
+lrwxrwxrwx  1 root root       40 Feb  9 12:41 initrd.img -> initrd.img-6.8.0-rc3-00136-g1f719a2f3fa6
+-rw-r--r--  1 root root 73028540 Feb  9 12:41 initrd.img-6.8.0-rc3-00136-g1f719a2f3fa6
+-rw-r--r--  1 root root  7814555 Feb  9 12:41 System.map-6.8.0-rc3-00136-g1f719a2f3fa6
+lrwxrwxrwx  1 root root       37 Feb  9 12:41 vmlinuz -> vmlinuz-6.8.0-rc3-00136-g1f719a2f3fa6
+-rw-r--r--  1 root root 13726208 Feb  9 12:41 vmlinuz-6.8.0-rc3-00136-g1f719a2f3fa6
+$ ls -l /lib/modules/6.8.0-rc3-00136-g1f719a2f3fa6
+total 1000
+lrwxrwxrwx  1 root root     32 Feb  9 12:38 build -> /home/dileep/dileep/build/kernel
+drwxr-xr-x 11 root root   4096 Feb  9 12:38 kernel
+-rw-r--r--  1 root root 131506 Feb  9 12:41 modules.alias
+-rw-r--r--  1 root root 130464 Feb  9 12:41 modules.alias.bin
+-rw-r--r--  1 root root   9363 Feb  9 12:38 modules.builtin
+-rw-r--r--  1 root root   9971 Feb  9 12:41 modules.builtin.alias.bin
+-rw-r--r--  1 root root  11532 Feb  9 12:41 modules.builtin.bin
+-rw-r--r--  1 root root  82430 Feb  9 12:38 modules.builtin.modinfo
+-rw-r--r--  1 root root  27290 Feb  9 12:41 modules.dep
+-rw-r--r--  1 root root  37853 Feb  9 12:41 modules.dep.bin
+-rw-r--r--  1 root root    158 Feb  9 12:41 modules.devname
+-rw-r--r--  1 root root   9247 Feb  9 12:38 modules.order
+-rw-r--r--  1 root root    125 Feb  9 12:41 modules.softdep
+-rw-r--r--  1 root root 248151 Feb  9 12:41 modules.symbols
+-rw-r--r--  1 root root 282681 Feb  9 12:41 modules.symbols.bin
+drwxr-xr-x  3 root root   4096 Feb  9 12:41 updates
+$ uname -r
+6.8.0-rc3-00136-g1f719a2f3fa6
+$ sudo dmidecode -s system-product-name
+[sudo] password for dileep: 
+HP Pavilion Laptop 15-eg2xxx
