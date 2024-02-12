@@ -1,0 +1,11 @@
+$ uname -r
+6.8.0-rc4-eudyptula-g841c35169323-dirty
+$ sudo dmesg | grep 6.8.0-rc4-eudyptula-g841c35169323-dirty
+[sudo] password for dileep: 
+Sorry, try again.
+[sudo] password for dileep: 
+[    0.000000] Linux version 6.8.0-rc4-eudyptula-g841c35169323-dirty (dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx) (gcc (Ubuntu 13.2.0-4ubuntu3) 13.2.0, GNU ld (GNU Binutils for Ubuntu) 2.41) #7 SMP PREEMPT_DYNAMIC Mon Feb 12 13:21:14 IST 2024
+[    0.000000] Command line: BOOT_IMAGE=/boot/vmlinuz-6.8.0-rc4-eudyptula-g841c35169323-dirty root=UUID=bda6573e-4f18-4b97-918f-08930442aecf ro security=selinux quiet splash vt.handoff=7
+...
+$ sudo dmidecode -s system-product-name
+HP Pavilion Laptop 15-eg2xxx
