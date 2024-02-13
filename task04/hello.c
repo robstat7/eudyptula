@@ -1,12 +1,17 @@
-#include <linux/module.h>     /* Needed by all modules */
-#include <linux/kernel.h>     /* Needed for KERN_DEBUG */
-#include <linux/init.h>       /* Needed for the macros */
+// SPDX-License-Identifier: GPL-2.0-or-later
+
+#define DEBUG
+
+#include <linux/module.h>
+#include <linux/printk.h>
+#include <linux/init.h>
 
 MODULE_LICENSE("GPL");
 
 static int __init hello_start(void)
 {
-	printk(KERN_DEBUG "Hello World!\n");
+	pr_debug("Hello World!\n");
+
 	return 0;
 }
 
