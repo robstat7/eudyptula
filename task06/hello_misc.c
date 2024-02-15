@@ -8,7 +8,7 @@
 
 MODULE_LICENSE("GPL");
 
-/* Define the maximum size in bytes for the data */
+/* Maximum size of the data */
 #define MAX_SIZE          13
 
 static const char assigned_id[] = "7c1caf2f50aa\n";
