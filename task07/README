@@ -1,0 +1,34 @@
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~$ ls -l /boot | grep 6.8.0-rc4-next-20240215
+-rw-r--r--  1 root root   220384 Feb 16 09:22 config-6.8.0-rc4-next-20240215
+lrwxrwxrwx  1 root root       34 Feb 16 09:23 initrd.img -> initrd.img-6.8.0-rc4-next-20240215
+-rw-r--r--  1 root root 77493144 Feb 16 09:23 initrd.img-6.8.0-rc4-next-20240215
+-rw-r--r--  1 root root  7849558 Feb 16 09:22 System.map-6.8.0-rc4-next-20240215
+lrwxrwxrwx  1 root root       31 Feb 16 09:22 vmlinuz -> vmlinuz-6.8.0-rc4-next-20240215
+-rw-r--r--  1 root root 13857280 Feb 16 09:22 vmlinuz-6.8.0-rc4-next-20240215
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~$ ls -l /lib/modules/6.8.0-rc4-next-20240215
+total 1004
+lrwxrwxrwx  1 root root     32 Feb 16 09:21 build -> /home/dileep/dileep/build/kernel
+drwxr-xr-x 10 root root   4096 Feb 16 09:21 kernel
+-rw-r--r--  1 root root 132135 Feb 16 09:23 modules.alias
+-rw-r--r--  1 root root 131106 Feb 16 09:23 modules.alias.bin
+-rw-r--r--  1 root root   9413 Feb 16 09:21 modules.builtin
+-rw-r--r--  1 root root   9971 Feb 16 09:23 modules.builtin.alias.bin
+-rw-r--r--  1 root root  11570 Feb 16 09:23 modules.builtin.bin
+-rw-r--r--  1 root root  82587 Feb 16 09:21 modules.builtin.modinfo
+-rw-r--r--  1 root root  27227 Feb 16 09:23 modules.dep
+-rw-r--r--  1 root root  37813 Feb 16 09:23 modules.dep.bin
+-rw-r--r--  1 root root    158 Feb 16 09:23 modules.devname
+-rw-r--r--  1 root root   9227 Feb 16 09:21 modules.order
+-rw-r--r--  1 root root    125 Feb 16 09:23 modules.softdep
+-rw-r--r--  1 root root 248978 Feb 16 09:23 modules.symbols
+-rw-r--r--  1 root root 283243 Feb 16 09:23 modules.symbols.bin
+drwxr-xr-x  3 root root   4096 Feb 16 09:23 updates
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~$ uname -r
+6.8.0-rc4-next-20240215
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~$ sudo dmesg | grep 6.8.0-rc4-next-20240215
+[sudo] password for dileep: 
+[    0.000000] Linux version 6.8.0-rc4-next-20240215 (dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx) (gcc (Ubuntu 13.2.0-4ubuntu3) 13.2.0, GNU ld (GNU Binutils for Ubuntu) 2.41) #8 SMP PREEMPT_DYNAMIC Fri Feb 16 09:20:02 IST 2024
+[    0.000000] Command line: BOOT_IMAGE=/boot/vmlinuz-6.8.0-rc4-next-20240215 root=UUID=bda6573e-4f18-4b97-918f-08930442aecf ro security=selinux quiet splash vt.handoff=7
+...
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~$ sudo dmidecode -s system-product-name
+HP Pavilion Laptop 15-eg2xxx
