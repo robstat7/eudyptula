@@ -98,6 +98,7 @@ static ssize_t foo_write(struct file *filp, const char __user *buf,
 	size_t bytes;
 	ssize_t r;
 
+	pr_info("putting write lock!\n");
 	if (mutex_lock_interruptible(&hello_debugfs_mutex) < 0) {
 		r = -EINTR;
 		goto out;
@@ -113,9 +114,10 @@ static ssize_t foo_write(struct file *filp, const char __user *buf,
 
 	data_len = bytes;
 	r = len;
+	pr_info("releasing write lock!\n");
 	mutex_unlock(&hello_debugfs_mutex);
 out:
-	/* No furhter write retry */
+	/* No further write retry */
 	return r;
 }
 
@@ -129,6 +131,7 @@ static ssize_t foo_read(struct file *filp, char __user *buf,
 	ssize_t bytes;
 	ssize_t r;
 
+	pr_info("putting read lock!\n");
 	if (mutex_lock_interruptible(&hello_debugfs_mutex) < 0) {
 		r = -EINTR;
 		goto out;
@@ -144,6 +147,7 @@ static ssize_t foo_read(struct file *filp, char __user *buf,
 
 	*f_pos += bytes;
 	r = bytes;
+	pr_info("releasing read lock!\n");
 	mutex_unlock(&hello_debugfs_mutex);
 out:
 	return r;
