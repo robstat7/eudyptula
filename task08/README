@@ -1,6 +1,6 @@
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ gcc foo.c
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ sudo insmod hello_debugfs.ko
-[sudo] password for dileep: 
+[sudo] password for dileep:
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ sudo lsmod | grep hello_debugfs
 hello_debugfs          12288  0
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ ls -l /sys/kernel/debug/eudyptula/
@@ -19,39 +19,39 @@ root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# cat /sys
 root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# echo 7c1caf2f50aa > /sys/kernel/debug/eudyptula/id
 root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# echo 7c1caf2f50abcd > /sys/kernel/debug/eudyptula/id
 bash: echo: write error: Invalid argument
-root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# cat /sys/kernel/debug/eudyptula/jiffies 
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# cat /sys/kernel/debug/eudyptula/jiffies
 4298031082
-root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# echo 1 > /sys/kernel/debug/eudyptula/jiffies 
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# echo 1 > /sys/kernel/debug/eudyptula/jiffies
 bash: echo: write error: Permission denied
-root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# 
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08#
 exit
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ cat /sys/kernel/debug/eudyptula/jiffies
 4298037666
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ echo 1 > /sys/kernel/debug/eudyptula/jiffies
 bash: /sys/kernel/debug/eudyptula/jiffies: Permission denied
-dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ cat /sys/kernel/debug/eudyptula/foo 
-dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ echo "hello world" > /sys/kernel/debug/eudyptula/foo 
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ cat /sys/kernel/debug/eudyptula/foo
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ echo "hello world" > /sys/kernel/debug/eudyptula/foo
 bash: /sys/kernel/debug/eudyptula/foo: Permission denied
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ sudo su
 root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# echo "hello world" > /sys/kernel/debug/eudyptula/foo
 root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# cat /sys/kernel/debug/eudyptula/foo
 hello world
-root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# ./a.out 
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# ./a.out
 root: read foo!
 hello world
 
 root: wrote foo!
-root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# ./a.out 
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# ./a.out
 root: read foo!
 Kernel development is cool!
 root: wrote foo!
-root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# ./a.out 
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# ./a.out
 root: wrote foo!
 root: read foo!
 Kernel development is cool!
-root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# 
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08#
 exit
-dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ sudo rmmod hello_debugfs 
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ sudo rmmod hello_debugfs
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ sudo lsmod | grep hello_debugfs
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ ls -l /sys/kernel/debug/eudyptula/
 ls: cannot access '/sys/kernel/debug/eudyptula/': No such file or directory
