@@ -17,7 +17,7 @@ static const size_t page_size = 4096;
 static char *data;
 static size_t data_len;
 static const char assigned_id[] = "7c1caf2f50aa\n";
-struct dentry *dir;
+static struct dentry *dir;
 
 /*
  * This function will be called when we open the debugfs file.
