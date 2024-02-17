@@ -1,3 +1,4 @@
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ sudo chmod a+x /sys/kernel/debug/
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ gcc foo.c
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ sudo insmod hello_debugfs.ko
 [sudo] password for dileep:
