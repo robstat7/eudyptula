@@ -1,4 +1,5 @@
-/* Program to demonstrate simultaneous
+/*
+ * Program to demonstrate simultaneous
  * writing and reading the foo file.
  */
 #include <fcntl.h>
