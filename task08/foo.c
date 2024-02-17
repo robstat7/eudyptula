@@ -70,11 +70,13 @@ int main(void)
 		return 1;
 	}
 
-	pthread_exit(NULL);
+	pthread_join( t1, NULL);
+	pthread_join( t2, NULL);
 
 	if (close(fd) == -1) {
 		printf("Cannot close %s.\n", filename);
 		return 1;
 	}
+
 	return 0;
 }
