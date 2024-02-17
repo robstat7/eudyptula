@@ -39,6 +39,7 @@ hello world
 root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# ./a.out 
 root: read foo!
 hello world
+
 root: wrote foo!
 root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# ./a.out 
 root: read foo!
