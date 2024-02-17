@@ -1,7 +1,7 @@
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ sudo chmod a+x /sys/kernel/debug/
+[sudo] password for dileep:
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ gcc foo.c
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ sudo insmod hello_debugfs.ko
-[sudo] password for dileep:
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ sudo lsmod | grep hello_debugfs
 hello_debugfs          12288  0
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ ls -l /sys/kernel/debug/eudyptula/
