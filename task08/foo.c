@@ -11,7 +11,7 @@
 void *write_foo(void *filed)
 {
 	int *fd;
-	const char *wdata = "Kernel development is cool!\n";
+	const char *wdata = "Kernel development is cool!";
 	size_t count;
 
 	fd = (int *)filed;
@@ -40,6 +40,7 @@ void *read_foo(void *filed)
 		printf("root: read foo!\n");
 		for (i = 0; i < bytes; i++)
 			printf("%c", rdata[i]);
+		printf("\n");
 	}
 
 	pthread_exit(NULL);
