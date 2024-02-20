@@ -64,6 +64,7 @@ void *read_foo(void *arg)
 		printf("root: read foo!\n");
 		for (i = 0; i < bytes; i++)
 			printf("%c", rdata[i]);
+		printf("\n");
 	}
 
 	close(fd);
