@@ -84,7 +84,7 @@ static ssize_t foo_show(struct kobject *kobj, struct kobj_attribute *attr,
 		goto out;
 	}
 
-	r = sysfs_emit(buf, "%s\n", data);
+	r = sysfs_emit(buf, "%s", data);
 
 	pr_info("releasing read lock!\n");
 	mutex_unlock(&hello_sysfs_mutex);
@@ -107,8 +107,8 @@ static ssize_t foo_store(struct kobject *kobj, struct kobj_attribute *attr,
 		goto out;
 	}
 
-	bytes = count < page_size ? count : page_size;
-	r = snprintf(data, page_size + 1, "%.*s", (int)bytes, buf);
+	bytes = count < (page_size - 1) ? count : (page_size - 1);
+	r = snprintf(data, page_size, "%.*s", (int)bytes, buf);
 
 	pr_info("releasing write lock!\n");
 	mutex_unlock(&hello_sysfs_mutex);
@@ -148,7 +148,7 @@ static int __init sysfs_hello_sysfs_init(void)
 	if (retval)
 		kobject_put(kobj);
 
-	data = kzalloc(page_size + 1, GFP_NOWAIT);
+	data = kzalloc(page_size, GFP_NOWAIT);
 	/* Set the initial empty data string */
 	strscpy(data, "\0", 1);
 
