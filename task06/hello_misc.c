@@ -4,14 +4,14 @@
 #include <linux/printk.h>
 #include <linux/init.h>
 #include <linux/string.h>
+#include <linux/uaccess.h>
 #include <asm-generic/errno-base.h>
 
 MODULE_LICENSE("GPL");
 
-/* Maximum size of the data */
-#define MAX_SIZE          13
+#define ID_LEN          12	/* Length of the ID */
 
-static const char assigned_id[] = "7c1caf2f50aa\n";
+static const char assigned_id[] = "7c1caf2f50aa";
 
 /*
  * This function will be called when we open the misc device file.
@@ -36,22 +36,17 @@ static ssize_t hello_misc_write(struct file *filp, const char __user *buf,
 				size_t len, loff_t *f_pos)
 {
 	int status;
-	char user_id[MAX_SIZE];
-	char data[MAX_SIZE];
+	char data[ID_LEN];
 
-	strscpy(user_id, assigned_id, MAX_SIZE);
-
-	if (len == MAX_SIZE) {
+	if (len == ID_LEN) {
 		/* copy data from user space to kernel space */
-		status = copy_from_user(data, buf, len);
+		status = copy_from_user(data, buf, ID_LEN);
 		if (status) {
 			pr_err("misc device - error during copy_from_user\n");
 			return -status;
 		}
 
-		/* make sure data is a null-terminated string */
-		data[len - 1] = '\0';
-		if (strcmp(data, user_id) == 0)
+		if (strncmp(data, assigned_id, ID_LEN) == 0)
 			return len;
 	}
 
@@ -65,13 +60,11 @@ static ssize_t hello_misc_read(struct file *filp, char __user *buf,
 			       size_t count, loff_t *f_pos)
 {
 	int status;
-	size_t data_len;
 	ssize_t bytes;
 
-	data_len = strlen(assigned_id);
-	bytes = count < (data_len - (*f_pos)) ? count : (data_len - (*f_pos));
+	bytes = count < (ID_LEN - (*f_pos)) ? count : (ID_LEN - (*f_pos));
 
-	/* copy assigned ID from kernel space to user space */
+	/* Copy the assigned ID from kernel space to user space */
 	status = copy_to_user(buf, assigned_id, bytes);
 	if (status) {
 		pr_err("misc device - error during copy_to_user\n");
