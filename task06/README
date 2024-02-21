@@ -1,93 +1,27 @@
-dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task06$ sudo insmod hello_misc.ko 
-[sudo] password for dileep: 
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task06$ sudo insmod hello_misc.ko
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task06$ sudo lsmod | grep hello_misc
 hello_misc             12288  0
-dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task06$ sudo journalctl --since "1 hour ago" | grep kernel
-Feb 16 01:29:52 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device registered!
-Feb 16 01:30:05 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device open!
-Feb 16 01:30:05 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: Eudyptula misc device close
-Feb 16 01:30:09 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device open!
-Feb 16 01:30:09 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: Eudyptula misc device close
-Feb 16 01:34:00 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device deregistered!
-Feb 16 01:38:40 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device registered!
-Feb 16 01:39:21 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: count=131072
-Feb 16 01:39:21 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: count=131072
-Feb 16 01:40:25 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device deregistered!
-Feb 16 01:40:40 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device registered!
-Feb 16 01:40:45 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: count=131072
-Feb 16 01:40:45 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: bytes=13
-Feb 16 01:40:45 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: count=131072
-Feb 16 01:40:45 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: bytes=0
-Feb 16 01:43:47 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device deregistered!
-Feb 16 01:43:51 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device registered!
-Feb 16 01:43:58 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: count=131072
-Feb 16 01:43:58 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: bytes=14
-Feb 16 01:43:58 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: count=131072
-Feb 16 01:43:58 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: bytes=0
-Feb 16 01:44:15 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: count=131072
-Feb 16 01:44:15 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: bytes=14
-Feb 16 01:44:15 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: count=131072
-Feb 16 01:44:15 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: bytes=0
-Feb 16 01:44:18 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: count=131072
-Feb 16 01:44:18 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: bytes=14
-Feb 16 01:44:18 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: count=131072
-Feb 16 01:44:18 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: bytes=0
-Feb 16 01:48:09 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device deregistered!
-Feb 16 01:48:15 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device registered!
-Feb 16 01:51:18 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device deregistered!
-Feb 16 02:04:24 dileep-HP-Pavilion-Laptop-15-eg2xxx dbus-daemon[3328]: [session uid=1000 pid=3328] Activating via systemd: service name='org.freedesktop.Tracker3.Miner.Extract' unit='tracker-extract-3.service' requested by ':1.15' (uid=1000 pid=3423 comm="/usr/libexec/tracker-miner-fs-3" label="kernel")
-Feb 16 02:20:15 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device registered!
-dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task06$ ls -l /dev/eudyptula 
-crw------- 1 root root 10, 117 Feb 16 02:20 /dev/eudyptula
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task06$ ls -l /dev/eudyptula
+crw------- 1 root root 10, 117 Feb 21 11:08 /dev/eudyptula
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task06$ sudo su
 root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task06# cat /dev/eudyptula
-7c1caf2f50aa
-root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task06# echo 7c1caf2f50aa > /dev/eudyptula
-root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task06# echo 7c1caf2f50bc > /dev/eudyptula
-bash: echo: write error: Invalid argument
-root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task06# echo 7c1caf2f50aabc > /dev/eudyptula
-bash: echo: write error: Invalid argument
-root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task06# echo my_id > /dev/eudyptula
-bash: echo: write error: Invalid argument
-root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task06# cat /dev/eudyptula
-7c1caf2f50aa
-root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task06# echo 7c1caf2f50aa > /dev/eudyptula
+7c1caf2f50aaroot@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task06# 
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task06# printf %s "7c1caf2f50aa" > /dev/eudyptula
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task06# echo $?
+0
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task06# printf %s "abcd" > /dev/eudyptula
+bash: printf: write error: Invalid argument
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task06# printf %s "7c1caf2f50aabcdefg" > /dev/eudyptula
+bash: printf: write error: Invalid argument
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task06# printf %s "7c1caf2f50az" > /dev/eudyptula
+bash: printf: write error: Invalid argument
 root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task06# 
 exit
-dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task06$ sudo rmmod hello_misc 
-dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task06$ sudo journalctl --since "1 hour ago" | grep kernel
-Feb 16 01:29:52 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device registered!
-Feb 16 01:30:05 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device open!
-Feb 16 01:30:05 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: Eudyptula misc device close
-Feb 16 01:30:09 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device open!
-Feb 16 01:30:09 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: Eudyptula misc device close
-Feb 16 01:34:00 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device deregistered!
-Feb 16 01:38:40 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device registered!
-Feb 16 01:39:21 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: count=131072
-Feb 16 01:39:21 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: count=131072
-Feb 16 01:40:25 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device deregistered!
-Feb 16 01:40:40 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device registered!
-Feb 16 01:40:45 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: count=131072
-Feb 16 01:40:45 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: bytes=13
-Feb 16 01:40:45 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: count=131072
-Feb 16 01:40:45 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: bytes=0
-Feb 16 01:43:47 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device deregistered!
-Feb 16 01:43:51 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device registered!
-Feb 16 01:43:58 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: count=131072
-Feb 16 01:43:58 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: bytes=14
-Feb 16 01:43:58 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: count=131072
-Feb 16 01:43:58 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: bytes=0
-Feb 16 01:44:15 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: count=131072
-Feb 16 01:44:15 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: bytes=14
-Feb 16 01:44:15 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: count=131072
-Feb 16 01:44:15 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: bytes=0
-Feb 16 01:44:18 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: count=131072
-Feb 16 01:44:18 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: bytes=14
-Feb 16 01:44:18 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: count=131072
-Feb 16 01:44:18 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: bytes=0
-Feb 16 01:48:09 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device deregistered!
-Feb 16 01:48:15 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device registered!
-Feb 16 01:51:18 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device deregistered!
-Feb 16 02:04:24 dileep-HP-Pavilion-Laptop-15-eg2xxx dbus-daemon[3328]: [session uid=1000 pid=3328] Activating via systemd: service name='org.freedesktop.Tracker3.Miner.Extract' unit='tracker-extract-3.service' requested by ':1.15' (uid=1000 pid=3423 comm="/usr/libexec/tracker-miner-fs-3" label="kernel")
-Feb 16 02:20:15 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device registered!
-Feb 16 02:26:31 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device deregistered!
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task06$ sudo rmmod hello_misc
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task06$ sudo lsmod | grep hello_misc
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task06$ ls -l /dev/eudyptula
+ls: cannot access '/dev/eudyptula': No such file or directory
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task06$ sudo journalctl --since "4 minutes 30 seconds ago" | grep kernel
+Feb 21 11:08:58 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device registered!
+Feb 21 11:09:07 dileep-HP-Pavilion-Laptop-15-eg2xxx dbus-daemon[1195]: [system] Activating via systemd: service name='org.freedesktop.PackageKit' unit='packagekit.service' requested by ':1.114' (uid=1000 pid=4462 comm="/snap/snap-store/959/usr/bin/snap-store --gapplica" label="kernel")
+Feb 21 11:13:28 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: eudyptula misc device deregistered!
