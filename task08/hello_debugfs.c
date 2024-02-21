@@ -9,14 +9,14 @@
 
 MODULE_LICENSE("GPL");
 
-#define MAX_SIZE          13	/* Maximum size of the data */
+#define ID_LEN          12	/* Length of the ID */
 
 static DEFINE_MUTEX(hello_debugfs_mutex);
 
 static const size_t page_size = 4096;
 static char *data;
 static size_t data_len;
-static const char assigned_id[] = "7c1caf2f50aa\n";
+static const char assigned_id[] = "7c1caf2f50aa";
 static struct dentry *dir;
 
 /*
@@ -36,28 +36,23 @@ static int hello_debugfs_close(struct inode *inode, struct file *filp)
 }
 
 /*
- * This function will be called when we write the id file.
+ * This function will be called when we write the 'id' file.
  */
 static ssize_t id_write(struct file *filp, const char __user *buf,
 			size_t len, loff_t *f_pos)
 {
 	int status;
-	char uid[MAX_SIZE];
-	char kdata[MAX_SIZE];
+	char kdata[ID_LEN];
 
-	strscpy(uid, assigned_id, MAX_SIZE);
-
-	if (len == MAX_SIZE) {
-		/* copy data from user space to kernel space */
-		status = copy_from_user(kdata, buf, len);
+	if (len == ID_LEN) {
+		/* Copy data from user space to kernel space */
+		status = copy_from_user(kdata, buf, ID_LEN);
 		if (status) {
-			pr_err("hello_debugfs - error during copy_from_user\n");
+			pr_err("hello_debugfs - error during copy_from_user!\n");
 			return -status;
 		}
 
-		/* make sure data is a null-terminated string */
-		kdata[len - 1] = '\0';
-		if (strcmp(kdata, uid) == 0)
+		if (strncmp(kdata, assigned_id, ID_LEN) == 0)
 			return len;
 	}
 
@@ -65,22 +60,20 @@ static ssize_t id_write(struct file *filp, const char __user *buf,
 }
 
 /*
- * This function will be called when we read the id file.
+ * This function will be called when we read the 'id' file.
  */
 static ssize_t id_read(struct file *filp, char __user *buf,
 		       size_t count, loff_t *f_pos)
 {
 	int status;
-	size_t kdata_len;
 	ssize_t bytes;
 
-	kdata_len = strlen(assigned_id);
-	bytes = count < (kdata_len - (*f_pos)) ? count : (kdata_len - (*f_pos));
+	bytes = count < (ID_LEN - (*f_pos)) ? count : (ID_LEN - (*f_pos));
 
-	/* copy assigned ID from kernel space to user space */
+	/* Copy the assigned ID from kernel space to user space */
 	status = copy_to_user(buf, assigned_id, bytes);
 	if (status) {
-		pr_err("hello_debugfs - error during copy_to_user\n");
+		pr_err("hello_debugfs - error during copy_to_user!\n");
 		return -status;
 	}
 
