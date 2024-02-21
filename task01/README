@@ -1,0 +1,19 @@
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task01$ make
+make -C /lib/modules/6.8.0-rc4-next-20240215/build M=/home/dileep/eudyptula/task01 modules
+make[1]: Entering directory '/home/dileep/dileep/build/kernel'
+  CC [M]  /home/dileep/eudyptula/task01/hello.o
+  MODPOST /home/dileep/eudyptula/task01/Module.symvers
+  CC [M]  /home/dileep/eudyptula/task01/hello.mod.o
+  LD [M]  /home/dileep/eudyptula/task01/hello.ko
+  BTF [M] /home/dileep/eudyptula/task01/hello.ko
+make[1]: Leaving directory '/home/dileep/dileep/build/kernel'
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task01$ ls -l | grep hello.ko
+-rw-rw-r-- 1 dileep dileep 171152 Feb 21 13:24 hello.ko
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task01$ sudo insmod hello.ko 
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task01$ sudo lsmod | grep hello
+hello                  12288  0
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task01$ sudo journalctl --since "1 minute ago" | grep kernel
+Feb 21 13:25:05 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: Hello World!
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task01$ sudo rmmod hello
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task01$ sudo lsmod | grep hello
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task01$ 
