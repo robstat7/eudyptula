@@ -67,7 +67,7 @@ void *read_foo(void *arg)
 		printf("\n");
 	}
 
-	close(fd);
+	close_file(fd);
 	pthread_exit(NULL);
 }
 
