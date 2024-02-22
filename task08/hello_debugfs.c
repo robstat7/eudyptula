@@ -5,6 +5,7 @@
 #include <linux/init.h>
 #include <linux/jiffies.h>
 #include <linux/mutex.h>
+#include <linux/uaccess.h>
 #include <asm-generic/errno-base.h>
 
 MODULE_LICENSE("GPL");
@@ -82,7 +83,7 @@ static ssize_t id_read(struct file *filp, char __user *buf,
 }
 
 /*
- * This function will be called when the root user writes the foo file.
+ * This function will be called when the root user writes the 'foo' file.
  */
 static ssize_t foo_write(struct file *filp, const char __user *buf,
 			 size_t len, loff_t *f_pos)
@@ -97,20 +98,19 @@ static ssize_t foo_write(struct file *filp, const char __user *buf,
 		goto out;
 	}
 
-	bytes = len < page_size ? len : page_size;
-	/* copy data from user space to kernel space */
+	bytes = len < (page_size - 1) ? len : (page_size - 1);
+	/* Copy data from user space to kernel space */
 	status = copy_from_user(data, buf, bytes);
 	if (status) {
-		pr_err("hello_debugfs - error during copy_from_user\n");
+		pr_err("hello_debugfs - error during copy_from_user!\n");
 		return -status;
 	}
 
 	data_len = bytes;
-	r = len;
+	r = bytes;
 	pr_info("releasing write lock!\n");
 	mutex_unlock(&hello_debugfs_mutex);
 out:
-	/* No further write retry */
 	return r;
 }
 
