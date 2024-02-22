@@ -149,6 +149,9 @@ static int __init sysfs_hello_sysfs_init(void)
 		kobject_put(kobj);
 
 	data = kzalloc(page_size, GFP_NOWAIT);
+	if (data == NULL)
+		return -ENOMEM;
+
 	/* Set the initial empty data string */
 	strscpy(data, "\0", 1);
 

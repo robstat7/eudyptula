@@ -187,6 +187,8 @@ static int __init debugfs_hello_debugfs_init(void)
 	}
 
 	data = kzalloc(page_size, GFP_NOWAIT);
+	if (data == NULL)
+		return -ENOMEM;
 
 	pr_info("hello_debugfs initialized!\n");
 	return 0;
