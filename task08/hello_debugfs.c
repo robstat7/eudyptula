@@ -115,7 +115,7 @@ out:
 }
 
 /*
- * This function will be called when we read the foo file.
+ * This function will be called when we read the 'foo' file.
  */
 static ssize_t foo_read(struct file *filp, char __user *buf,
 			size_t count, loff_t *f_pos)
@@ -131,10 +131,10 @@ static ssize_t foo_read(struct file *filp, char __user *buf,
 	}
 
 	bytes = count < (data_len - (*f_pos)) ? count : (data_len - (*f_pos));
-	/* copy assigned ID from kernel space to user space */
+	/* Copy the assigned ID from kernel space to user space */
 	status = copy_to_user(buf, data, bytes);
 	if (status) {
-		pr_err("hello_debugfs - error during copy_to_user\n");
+		pr_err("hello_debugfs - error during copy_to_user!\n");
 		return -status;
 	}
 
