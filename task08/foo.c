@@ -1,6 +1,6 @@
 /*
- * Program to demonstrate simultaneous
- * writing and reading the foo file.
+ * Program to demonstrate concurrent
+ * writing and reading of the 'foo' file.
  */
 #include <fcntl.h>
 #include <unistd.h>
