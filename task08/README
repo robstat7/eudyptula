@@ -1,82 +1,131 @@
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ sudo chmod a+x /sys/kernel/debug/
-[sudo] password for dileep:
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ gcc foo.c
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ sudo insmod hello_debugfs.ko
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ sudo lsmod | grep hello_debugfs
 hello_debugfs          12288  0
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ ls -l /sys/kernel/debug/eudyptula/
 total 0
--rw-r--r-- 1 root root 0 Feb 17 12:54 foo
--rw-rw-rw- 1 root root 0 Feb 17 12:54 id
--r--r--r-- 1 root root 0 Feb 17 12:54 jiffies
+-rw-r--r-- 1 root root 0 Feb 22 09:43 foo
+-rw-rw-rw- 1 root root 0 Feb 22 09:43 id
+-r--r--r-- 1 root root 0 Feb 22 09:43 jiffies
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ cat /sys/kernel/debug/eudyptula/id
-7c1caf2f50aa
-dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ echo 7c1caf2f50aa > /sys/kernel/debug/eudyptula/id
-dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ echo 7c1caf2f50az > /sys/kernel/debug/eudyptula/id
-bash: echo: write error: Invalid argument
+7c1caf2f50aadileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ 
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ printf %s "7c1caf2f50aa" > /sys/kernel/debug/eudyptula/id
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ echo $?
+0
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ printf %s "7c1caf2f50az" > /sys/kernel/debug/eudyptula/id
+bash: printf: write error: Invalid argument
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ sudo su
 root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# cat /sys/kernel/debug/eudyptula/id
-7c1caf2f50aa
-root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# echo 7c1caf2f50aa > /sys/kernel/debug/eudyptula/id
-root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# echo 7c1caf2f50abcd > /sys/kernel/debug/eudyptula/id
-bash: echo: write error: Invalid argument
+7c1caf2f50aaroot@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# 
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# printf %s "7c1caf2f50aa" > /sys/kernel/debug/eudyptula/id
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# echo $?
+0
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# printf %s "abcd" > /sys/kernel/debug/eudyptula/id
+bash: printf: write error: Invalid argument
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# printf %s "7c1caf2f50aabcdefgh" > /sys/kernel/debug/eudyptula/id
+bash: printf: write error: Invalid argument
 root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# cat /sys/kernel/debug/eudyptula/jiffies
-4298031082
-root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# echo 1 > /sys/kernel/debug/eudyptula/jiffies
-bash: echo: write error: Permission denied
-root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08#
+4298416834
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# printf %d "1" > /sys/kernel/debug/eudyptula/jiffies 
+bash: printf: write error: Permission denied
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# 
 exit
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ cat /sys/kernel/debug/eudyptula/jiffies
-4298037666
-dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ echo 1 > /sys/kernel/debug/eudyptula/jiffies
+4298489052
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ printf %d "1" > /sys/kernel/debug/eudyptula/jiffies
 bash: /sys/kernel/debug/eudyptula/jiffies: Permission denied
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ cat /sys/kernel/debug/eudyptula/foo
-dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ echo "hello world" > /sys/kernel/debug/eudyptula/foo
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ printf %s "hello world" > /sys/kernel/debug/eudyptula/foo
 bash: /sys/kernel/debug/eudyptula/foo: Permission denied
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ sudo su
-root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# echo "hello world" > /sys/kernel/debug/eudyptula/foo
+[sudo] password for dileep: 
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# python3 -c "print('A'*4095, end = '')" > /sys/kernel/debug/eudyptula/foo
 root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# cat /sys/kernel/debug/eudyptula/foo
-hello world
-root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# ./a.out
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAroot@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# 
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# cat /sys/kernel/debug/eudyptula/foo | awk '{print length}'
+4095
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# python3 -c "print('A'*4096, end = '')" > /sys/kernel/debug/eudyptula/foo
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# cat /sys/kernel/debug/eudyptula/foo
+Aroot@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# 
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# cat /sys/kernel/debug/eudyptula/foo | awk '{print length}'
+1
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# python3 -c "print('A'*8192, end = '')" > /sys/kernel/debug/eudyptula/foo
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# cat /sys/kernel/debug/eudyptula/foo
+AAroot@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# 
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# cat /sys/kernel/debug/eudyptula/foo | awk '{print length}'
+2
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# printf %s "hello world" > /sys/kernel/debug/eudyptula/foo
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# ./a.out 
 root: read foo!
-hello world
-
 root: wrote foo!
-root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# ./a.out
+hello world
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# ./a.out 
+root: wrote foo!
+root: read foo!
+Kernel development is cool!
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# ./a.out 
 root: read foo!
 Kernel development is cool!
 root: wrote foo!
-root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# ./a.out
-root: wrote foo!
-root: read foo!
-Kernel development is cool!
-root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08#
+root@dileep-HP-Pavilion-Laptop-15-eg2xxx:/home/dileep/eudyptula/task08# 
 exit
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ sudo rmmod hello_debugfs
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ sudo lsmod | grep hello_debugfs
 dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ ls -l /sys/kernel/debug/eudyptula/
 ls: cannot access '/sys/kernel/debug/eudyptula/': No such file or directory
-dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ sudo journalctl --since "1 hour ago" | grep kernel
-Feb 17 12:53:13 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: hello_debugfs cleaned up!
-Feb 17 12:53:53 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: hello_debugfs initialized!
-Feb 17 12:54:14 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: hello_debugfs cleaned up!
-Feb 17 12:54:32 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: hello_debugfs initialized!
-Feb 17 12:57:38 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting read lock!
-Feb 17 12:57:38 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing read lock!
-Feb 17 12:58:06 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting write lock!
-Feb 17 12:58:06 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing write lock!
-Feb 17 12:58:13 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting read lock!
-Feb 17 12:58:13 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing read lock!
-Feb 17 12:58:38 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting read lock!
-Feb 17 12:58:38 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing read lock!
-Feb 17 12:58:38 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting write lock!
-Feb 17 12:58:38 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing write lock!
-Feb 17 12:58:46 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting read lock!
-Feb 17 12:58:46 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing read lock!
-Feb 17 12:58:46 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting write lock!
-Feb 17 12:58:46 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing write lock!
-Feb 17 12:59:29 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting write lock!
-Feb 17 12:59:29 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing write lock!
-Feb 17 12:59:29 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting read lock!
-Feb 17 12:59:29 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing read lock!
-Feb 17 12:59:53 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: hello_debugfs cleaned up!
+dileep@dileep-HP-Pavilion-Laptop-15-eg2xxx:~/eudyptula/task08$ sudo journalctl --since "3 hours 23 minutes ago" | grep kernel
+Feb 22 09:43:38 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: hello_debugfs initialized!
+Feb 22 13:01:10 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting read lock!
+Feb 22 13:01:10 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing read lock!
+Feb 22 13:01:38 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting write lock!
+Feb 22 13:01:38 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing write lock!
+Feb 22 13:01:44 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting read lock!
+Feb 22 13:01:44 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing read lock!
+Feb 22 13:01:44 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting read lock!
+Feb 22 13:01:44 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing read lock!
+Feb 22 13:02:00 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting read lock!
+Feb 22 13:02:00 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing read lock!
+Feb 22 13:02:00 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting read lock!
+Feb 22 13:02:00 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing read lock!
+Feb 22 13:02:09 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting write lock!
+Feb 22 13:02:09 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing write lock!
+Feb 22 13:02:09 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting write lock!
+Feb 22 13:02:09 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing write lock!
+Feb 22 13:02:16 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting read lock!
+Feb 22 13:02:16 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing read lock!
+Feb 22 13:02:16 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting read lock!
+Feb 22 13:02:16 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing read lock!
+Feb 22 13:02:24 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting read lock!
+Feb 22 13:02:24 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing read lock!
+Feb 22 13:02:24 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting read lock!
+Feb 22 13:02:24 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing read lock!
+Feb 22 13:02:33 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting write lock!
+Feb 22 13:02:33 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing write lock!
+Feb 22 13:02:33 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting write lock!
+Feb 22 13:02:33 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing write lock!
+Feb 22 13:02:33 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting write lock!
+Feb 22 13:02:33 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing write lock!
+Feb 22 13:02:38 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting read lock!
+Feb 22 13:02:38 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing read lock!
+Feb 22 13:02:38 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting read lock!
+Feb 22 13:02:38 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing read lock!
+Feb 22 13:02:46 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting read lock!
+Feb 22 13:02:46 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing read lock!
+Feb 22 13:02:46 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting read lock!
+Feb 22 13:02:46 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing read lock!
+Feb 22 13:02:55 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting write lock!
+Feb 22 13:02:55 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing write lock!
+Feb 22 13:03:08 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting read lock!
+Feb 22 13:03:08 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing read lock!
+Feb 22 13:03:08 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting write lock!
+Feb 22 13:03:08 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing write lock!
+Feb 22 13:03:22 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting write lock!
+Feb 22 13:03:22 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing write lock!
+Feb 22 13:03:22 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting read lock!
+Feb 22 13:03:22 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing read lock!
+Feb 22 13:03:26 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting read lock!
+Feb 22 13:03:26 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing read lock!
+Feb 22 13:03:26 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: putting write lock!
+Feb 22 13:03:26 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: releasing write lock!
+Feb 22 13:03:51 dileep-HP-Pavilion-Laptop-15-eg2xxx kernel: hello_debugfs cleaned up!
